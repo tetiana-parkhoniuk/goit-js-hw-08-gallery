@@ -58,17 +58,20 @@ function setBigImageSrc(link) {
 
 function openModalWindow() {
     lightboxEl.classList.add('is-open');
+    window.addEventListener("keydown", onEscBtnPress);
 };
 
 // 5) Close Modal Window //
 
 const closeModalWindowBtn = document.querySelector('button[data-action="close-lightbox"]');
 
-closeModalWindowBtn.addEventListener("click", onCloseModalWindowBtn);
+closeModalWindowBtn.addEventListener("click", onCloseModalWindow);
 
-function onCloseModalWindowBtn(evt) {
+function onCloseModalWindow(evt) {
     closeModalWindow();
-    clearBigImgSrc();
+  clearBigImgSrc();
+  window.removeEventListener("keydown", onEscBtnPress);
+
 };
 
 function closeModalWindow() {
@@ -83,16 +86,16 @@ function clearBigImgSrc() {
 
 const lightboxOverlayEl = document.querySelector('div.lightbox__overlay');
 
-lightboxOverlayEl.addEventListener("click", onLightboxOverlayClick);
+lightboxOverlayEl.addEventListener("click", onCloseModalWindow);
 
-function onLightboxOverlayClick(evt) {
-    closeModalWindow();
-    clearBigImgSrc();
-};
+// function onLightboxOverlayClick(evt) {
+//     closeModalWindow();
+//     clearBigImgSrc();
+// };
 
 // 6) Close Modal Window (ESC button) //
 
-window.addEventListener("keydown", onEscBtnPress);
+// window.addEventListener("keydown", onEscBtnPress);
 
 function onEscBtnPress(evt) {
     if (evt.code !== 'Escape') {
